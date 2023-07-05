@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ReactiveStore.Example.Page.Main.MainPage">
+
+    <StackLayout>
+        <!-- Place new controls here -->
+        
+        <Button Text="Download" Command="{Binding DownloadCommand}"/>
+        
+        <Label x:Name="label"
+               FontSize="24"
+               HorizontalOptions="Center"
+               VerticalOptions="Start" />
+    </StackLayout>
+
+</ContentPage>
