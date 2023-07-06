@@ -6,16 +6,17 @@ using System.Threading;
 
 namespace ReactiveStore.Net;
 
-public class Store<TState, TAction> : IDisposable
+public class Store<TState, TAction, TReducer> : IDisposable where TReducer : IReducer<TState, TAction>, new()
 {
     private readonly BehaviorSubject<TState> _state;
     private readonly Subject<TAction> _action;
     private readonly CompositeDisposable _compositeDisposable;
 
-    public Store(TState initialState, IReducer<TState, TAction> reducer)
+    public Store(TState initialState)
     {
         _state = new BehaviorSubject<TState>(initialState);
         _action = new Subject<TAction>();
+        var reducer = new TReducer();
         _compositeDisposable = new CompositeDisposable(
             _action.Subscribe(action => _state.OnNext(reducer.Reduce(_state.Value, action)))
         );

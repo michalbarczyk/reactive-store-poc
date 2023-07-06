@@ -10,7 +10,7 @@ namespace ReactiveStore.Example.Page.Main
 {
     public partial class MainPage : ContentPage
     {
-        private Store<MainPageState, MainPageAction> _store;
+        private Store<MainPageState, MainPageAction, MainPageReducer> _store;
 
         private readonly IObservable<string> _someAdditionalData = Observable.Return("some additional data");
         
@@ -32,9 +32,8 @@ namespace ReactiveStore.Example.Page.Main
 
         private void SetupStore()
         {
-            _store = new Store<MainPageState, MainPageAction>(
-                new MainPageState { ConfirmedValue = string.Empty },
-                new MainPageReducer()
+            _store = new Store<MainPageState, MainPageAction, MainPageReducer>(
+                new MainPageState { ConfirmedValue = string.Empty }
             );
 
             _store.Effect(action => action
